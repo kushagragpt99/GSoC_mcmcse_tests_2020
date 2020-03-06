@@ -1,0 +1,54 @@
+
+R version 3.6.3 (2020-02-29) -- "Holding the Windsock"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[Previously saved workspace restored]
+
+> #install.packages('mcmcse', repos='http://cran.us.r-project.org')
+> ################################################
+> ## Aim: Calculating ESS for a random sample
+> ## Also: Calculate only eigen values of a matrix
+> ################################################
+> set.seed(10)
+> library(mcmcse)
+mcmcse: Monte Carlo Standard Errors for MCMC
+Version 1.4-1 created on 2020-01-29.
+copyright (c) 2012, James M. Flegal, University of California, Riverside
+                    John Hughes, University of Colorado, Denver
+                    Dootika Vats, University of Warwick
+                    Ning Dai, University of Minnesota
+ For citation information, type citation("mcmcse").
+ Type help("mcmcse-package") to get started.
+
+> 
+> #Sampling 1e4 samples from N(0,1) & using ess function
+> foo <- rnorm(1e4)
+> ess(foo)
+[1] 10000
+> 
+> #Sampling a random matrix and calculating eigen values
+> rmatrix <- matrix(rnorm(100), ncol = 10)
+> eigen(rmatrix, only.values = TRUE)$values
+ [1] -2.4114033+0.666281i -2.4114033-0.666281i -0.4460854+2.428363i
+ [4] -0.4460854-2.428363i  2.1529774+1.037413i  2.1529774-1.037413i
+ [7]  1.5401766+1.422358i  1.5401766-1.422358i -0.4395342+0.604995i
+[10] -0.4395342-0.604995i
+> 
+> proc.time()
+   user  system elapsed 
+  0.203   0.171   0.376 
